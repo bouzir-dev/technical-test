@@ -3,7 +3,6 @@ from datetime import datetime
 
 
 class Solution1:
-
     input_file = 'data/input.json'
     output_file = 'data/output.json'
 
@@ -15,7 +14,6 @@ class Solution1:
                 self.rentals = data["rentals"]
         except FileNotFoundError:
             raise Exception('Input file could not be found.')
-
 
     @staticmethod
     def get_duration_days(start, end):
@@ -30,10 +28,10 @@ class Solution1:
         start = datetime.strptime(start, date_format)
         end = datetime.strptime(end, date_format)
         delta = end - start
-        if delta.days < 1:
+        duration = delta.days + 1
+        if duration < 1:
             raise Exception('end_date must be greater or equal to start_date')
         # add one to days difference since we need number of terms not just difference
-        duration = delta.days + 1
         return duration
 
     @staticmethod
@@ -71,7 +69,7 @@ class Solution1:
         distance = obj.get("distance")
 
         rental_price = self.calculate_duration_cost(rental_days, car_object.get("price_per_day")) + \
-            self.calculate_distance_cost(distance, car_object.get("price_per_km"))
+                       self.calculate_distance_cost(distance, car_object.get("price_per_km"))
 
         return rental_price
 
