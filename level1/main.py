@@ -68,7 +68,7 @@ class Solution1:
         distance = obj.get("distance")
 
         rental_price = self.calculate_duration_cost(rental_days, car_object.get("price_per_day")) + \
-                       self.calculate_distance_cost(distance, car_object.get("price_per_km"))
+            self.calculate_distance_cost(distance, car_object.get("price_per_km"))
 
         return rental_price
 
