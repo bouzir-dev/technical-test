@@ -1,5 +1,5 @@
 import unittest
-from main import Solution1
+from level1.main import Solution1
 
 
 class MyTestCase(unittest.TestCase):
@@ -24,7 +24,7 @@ class MyTestCase(unittest.TestCase):
             "end_date": "2017-12-10",
             "distance": 100
         }
-        self.assertEqual(self.solution.calculate_rental_price(rental_example), 7000)
+        self.assertEqual(self.solution.calculate_rental_price(rental_example, 3), 7000)
 
 
 

@@ -53,7 +53,7 @@ class Solution1:
 
         return distance * price_per_km
 
-    def calculate_rental_price(self, obj):
+    def calculate_rental_price(self, obj, rental_days):
         """
             calculate rental price for a rental object which is composed of duration cost + distance cost
             Parameters {(obj: rental object) type: dict }
@@ -65,13 +65,15 @@ class Solution1:
             (car for car in self.cars if car.get("id") == obj.get("car_id")),
             None
         )
-        rental_days = self.get_duration_days(obj.get("start_date"), obj.get("end_date"))
         distance = obj.get("distance")
 
         rental_price = self.calculate_duration_cost(rental_days, car_object.get("price_per_day")) + \
                        self.calculate_distance_cost(distance, car_object.get("price_per_km"))
 
         return rental_price
+
+    def get_rental_details(self, rental, rental_days):
+        return {"price": self.calculate_rental_price(rental, rental_days)}
 
     def get_rentals_result_list(self):
         """
@@ -81,9 +83,10 @@ class Solution1:
         """
         rentals_list = []
         for rental in self.rentals:
+            rental_days = self.get_duration_days(rental.get("start_date"), rental.get("end_date"))
             rentals_list.append({
                 "id": rental["id"],
-                "price": self.calculate_rental_price(rental)
+                **self.get_rental_details(rental, rental_days)
             })
 
         return rentals_list
